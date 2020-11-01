@@ -39,5 +39,27 @@ mount действует ло перезагрузки
 mount -a - перечитывает файл /etc/fstab
 
 free -mh - выводит информации об оперативной памяти и подкачке
+mkswap /dev/swapgroup/swap - установить раздел swap, как раздел подкачки
+swapon /dev/swapgroup/swap - включить раздел подкачки
+swapoff /dev/swapgroup/swap - выключить раздел подкачки
+Чтоб работало постоянно, надо добавить в fstab
+swapon -a - включить все свапы из fstab
+swapoff -a - выключить все свапы
+
+Если делаем раздел физический, то указываем метку 82 в fdisk или gdisk
+swapon -s - информация о разделах подкачки
+cat /proc/swaps - информация о разделах подкачки
+
+
+getfacl имя_файла - выводит подробные права
+setfacl -m u:user:rw file1 - дает права чтения и запись для определенного доступа
+setfacl -m m::r file1 - меняем маску для файла
+setfacl -m m::- file1 - меняем маску на нулевую
+setfacl -m g:group1:rw file 1 - меняем маску для группы
+setfacl -d -m u:user:rw dir1 - права применяются на все новые файлы в директории(наследование)
+setfacl -m u:user:rw dir1 - дает права на папку для определенного юзера
+setfacl -x или setfacl --remove-default dir 1 - убирает наследование
+setfacl -x u:user dir1 - удаляет права доступа
+getfacl file1 | setfacl --set-file=- file2 - делает права файла 2 такие же как у файла 1
 
 
